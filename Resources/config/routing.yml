@@ -1,0 +1,35 @@
+BtgMyBudgetBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: BtgMyBudgetBundle:Default:index }
+
+BtgMyBudgetBundle_reports:
+  pattern: /budget/reports
+  defaults: { _controller: BtgMyBudgetBundle:Reports:numeric }
+  
+BtgMyBudgetBundle_help_notes:
+  pattern: /budget/help/notes
+  defaults: { _controller: BtgMyBudgetBundle:Help:notes }
+    
+BtgMyBudgetBundle_help:
+  pattern: /budget/help
+  defaults: { _controller: BtgMyBudgetBundle:Import:help }
+  
+BtgMyBudgetBundle_import:
+  pattern: /budget/import
+  defaults: { _controller: BtgMyBudgetBundle:Import:process }
+
+BtgMyBudgetBundle_categories:
+  pattern: /budget/categories
+  defaults: { _controller: BtgMyBudgetBundle:Category:categories }
+  
+BtgMyBudgetBundle_matches:
+  pattern: /budget/matches
+  defaults: { _controller: BtgMyBudgetBundle:Matches:matches }
+  
+BtgMyBudgetBundle_options:
+  pattern: /budget/options
+  defaults: { _controller: BtgMyBudgetBundle:Options:edit }
+  
+BtgMyBudgetBundle_transactions:
+  pattern: /budget/transactions
+  defaults: { _controller: BtgMyBudgetBundle:Transaction:transactions }

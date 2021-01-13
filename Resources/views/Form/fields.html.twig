@@ -1,0 +1,22 @@
+{# src/Btg/MyBudgetBundle/Resources/views/Form/fields.html.twig #}
+
+{# Overrides of exising templates for BTG. #}
+
+{# From http://stackoverflow.com/questions/10043251/how-to-add-a-css-class-on-a-form-row-in-twig-template #}
+{# Allows an array of attributes to be passed in the form_row() function which uses this template:#}
+{% extends 'form_div_layout.html.twig' %}
+
+{% block field_row %}
+{% spaceless %}
+    {% set class='' %}
+    {% if attr.class is defined %}
+      {% set class = attr.class %}
+    {% endif %}
+
+    <div class="{{ class }}">
+        {{ form_label(form, label|default(null)) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endspaceless %}
+{% endblock field_row %}

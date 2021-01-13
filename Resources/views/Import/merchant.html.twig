@@ -1,0 +1,67 @@
+{# ===================================================================================================
+ * File name   : merchant.html.twig
+ * Created by  : D.McEnhill (davidmcenhill@gmail.com)
+ * Created on  : June 24, 2012
+ * Description : Form for CRUD budget merchants.
+ * 
+ #}
+{# src/Btg/MyBudgetBundle/Resources/views/Import/merchant.html.twig #}
+{% extends 'BtgMyBudgetBundle::datagrid.html.twig' %}
+{# % form_theme form 'BtgMyBudgetBundle:Form:fields.html.twig' % #}
+
+{% block work_area %} {# this will be inserted into block work area in the the layout template. #}
+<div id="merhantsLayout">
+   <p>{{ debug_msg }}</p>
+   <h1>Merchants</h1>
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+		<div class="flash-notice">
+			{{ flashMessage }}
+		</div>
+	{% endfor %}
+   <form action="{{ path('BtgMyBudgetBundle_matches') }}" method="post" {{ form_enctype(form) }} novalidate="novalidate">
+        <div id="pageControls">
+          <div class='pagecontrols'>
+                        <div class='pageofpage'>Page {{ page }} of {{ pages }}</div>
+                        <div class="button butPrev"><input type="submit" name="PreviousPage" value="<" /></div>
+                  {# Using form_widget to avoid getting a label #} 
+                  {{ form_widget(form['form'].page_nr, { 'attr' : { 'class' : 'page_nr' }}) }}
+                        <div class="button butNext"><input type="submit" name="NextPage" value=">" /></div>
+          </div>
+          {{ form_widget(form['form'].nr_trans_page, { 'attr' : { 'class' : 'nrresults' }}) }}
+          {{ form_rest(form['form']) }}  {# Needed for form token #}
+        </div> {# pagecontrols #}
+
+				
+        <ul class="datagrid"
+             {# Add prototype to be used when the add button pressed - see http://symfony.com/doc/2.3/cookbook/form/form_collections.html #}
+            data-prototype="
+             <div class='col1'>{{ form_widget(form.merchants.vars.prototype.name) | e }}</div>
+             <div class='col2'>{{ form_widget(form.merchants.vars.prototype.pattern) | e }}</div>
+             <div class='col2'>{{ form_widget(form.merchants.vars.prototype.fk_category_id) | e }}</div>" >
+         <div class='col1'><h2>Name</h2></div>
+         <div class='col2'><h2>Transaction Match Pattern</h2></div>
+         <div class='col3'><h2>Category</h2></div>
+         {{ form_errors(form) }}
+            <div class="col1 filter">{{ form_widget(form.filter_merchant_name) }}</div>
+            <div class="col2 filter">{{ form_widget(form.filter_match_pattern) }}</div>
+            <div class="col3 filter">{{ form_widget(form.filter_category_id) }}</div>
+            <button type="submit" name="Filter" value="Filter" class="button butFilter">&nbsp;<i>Refresh the page</i></button>
+            {% for merchant in form.merchants %}
+            <li>
+               <div class="col1">{{ form_widget(merchant.name) }}</div>
+               <div class="col2">{{ form_widget(merchant.pattern) }}</div>
+               <div class="col3">{{ form_widget(merchant.fk_category_id) }}</div>
+               <div>{{ form_widget(merchant.merchant_id) }}</div>
+            </li>
+            {% endfor %}
+         </ul>
+         <div class="button1"><input type="button" value="Add" name="Add" onClick="newGridRow()" /></div>
+         <div class="button2"><input type="submit" name="Cancel" value="Cancel" /></div>
+         <div class="button3"><input type="submit" name="Save" value="Save" /></div>
+         {# {{ form_widget(form._token) }} #}
+         {{ form_rest(form) }}
+   </form>
+	{#{{ form_end(form) }}#}
+</div>
+
+{% endblock %}

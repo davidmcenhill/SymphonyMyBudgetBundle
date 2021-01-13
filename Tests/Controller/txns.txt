@@ -1,0 +1,9 @@
+Statement            4 (Page 1 of 16)
+     Statement begins     4 September 2011
+     Statement ends       3 December 2011
+  MR D AND MS O R MCENHILL                       ',
+      Closing balance      $1,048.98 CR
+  04 Sep HAIRWORLD-SOUTHLAND CHELTENHAM VIC                                 40.00 2
+  04 Sep TARGET SOUTHLAND VIC AU',
+  
+         Cash Out $20.00 Purchase $58.00                                    78.00 -

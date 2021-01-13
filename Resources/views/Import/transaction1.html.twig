@@ -1,0 +1,139 @@
+{# ===================================================================================================
+ * File name   : transaction.html.twig
+ * Created by  : D.McEnhill (davidmcenhill@gmail.com)
+ * Created on  : August 20, 2012
+ * Description : Form for displaying transactions.
+ * 
+ #}
+{# src/Btg/MyBudgetBundle/Resources/views/Import/transaction.html.twig #}
+{% extends 'BtgMyBudgetBundle::datagrid.html.twig' %}
+{% form_theme form['form'] 'BtgMyBudgetBundle:Form:fields.html.twig' %}
+
+{% block work_area %} {# this will be inserted into block work area in the the layout template. #}
+<div id="transactionsLayout">
+   <p>{{ debug_msg }}</p>
+   <h1>Transactions</h1>
+	{#
+   {% if app.session.hasFlash('notice') %}
+      <div class="flash-notice">
+         {{ app.session.flash('notice') }}
+      </div>
+   {% endif %}
+	#}
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+		<div class="flash-notice">
+			{{ flashMessage }}
+		</div>
+	{% endfor %}
+   {# Note : form_enctype(form) in case there is an update field, don't worry right since only then will it render enctype="multipart/form-data". #}
+   <form name='transactions' 
+			action="{{ path('BtgMyBudgetBundle_transactions') }}" 
+			method="post" {{ form_enctype(form) }} 
+			novalidate="novalidate">
+		<div id="pageControls">
+		  {{ form_row(form['form'].startdate, { 'label' : 'From:', 'attr' : { 'class' : 'startdate' }}) }}
+		  {{ form_row(form['form'].enddate, { 'label' : 'To:', 'attr' : { 'class' : 'enddate' }}) }}
+		  <div class='pagecontrols'>
+				<div class='pageofpage'>Page {{ page }} of {{ pages }}</div>
+				<div class="button butPrev"><input type="submit" name="PreviousPage" value="<" /></div>
+			  {# Using form_widget to avoid getting a label #} 
+			  {{ form_widget(form['form'].page_nr, { 'attr' : { 'class' : 'page_nr' }}) }}
+				<div class="button butNext"><input type="submit" name="NextPage" value=">" /></div>
+		  </div>
+		  {{ form_widget(form['form'].nr_trans_page, { 'attr' : { 'class' : 'nrresults' }}) }}
+		  {{ form_rest(form['form']) }}  {# Needed for form token #}
+		</div> {# pagecontrols #}
+		<button type="submit" name="Refresh" value="Refresh" class="button butRefresh">
+			<b class="imgAnchor"></b>Refresh<i>Refresh the page.</i>
+		</button>
+		<button type="submit" name="Save" value="Save" class="button butSave">
+			<b class="imgAnchor"></b>Save<i>Save changes</i>
+		</button>
+		<button type="submit" name="Cancel" value="Cancel" class="button butCancel">
+			<b class="imgAnchor"></b>Cancel<i>Undo unsaved changes</i>
+		</button>
+		<div class="divAction">
+			 <button type="submit" name="Action" value="Action" class="button butAction">
+				  Action
+				  <b class="dropdown"></b>
+			 </button>
+			<ul>
+				<li>
+					<button type="submit" name="Defaults" value="Defaults" class="button butDefaults">
+						Defaults<i>Set date and page fields to defaults.</i>
+					</button>
+				</li>
+				<li>
+					<button type="submit" name="Assign" value="Assign" class="button butAssign">
+						<img src="{{ asset('bundles/btgmybudget/images/assign.png') }}" alt/>
+							Assign<i>Auto assigns categories based on merchant patterns</i>
+					</button>
+				</li>
+				<li>
+					<button type="submit" name="SetToUnknown" value="SetToUnknown" class="button butUnknown">
+						Set Rest to Unknown<i>Sets unassigned transactions to the Unknown category.</i>
+					</button>
+				</li>
+				<li>
+					<button type="submit" name="Decategorise" value="Decategorise" class="button butDecategorise">
+						Decategorise<i>Resets merchant and category of all selected transactions.</i>
+					</button>
+				</li>
+			</ul>
+		</div>
+		<div class='col1'>
+			<h2>
+				<div class="h2Date">Date & Time</div>
+					{% if order_by_date_asc %}
+						<button type="submit" name="OrderByDateDesc" value="OrderByDateDesc" class="button butDateDescending">&nbsp;<i>Reorder by newest first.</i></button>
+					{% else %}
+						<button type="submit" name="OrderByDateAsc" value="OrderByDateAsc" class="button butDateAscending">&nbsp;<i>Reorder by oldest first.</i></button>
+					{% endif %}
+			</h2>
+		</div>
+		<div class='col2'><h2>Description</h2></div>
+		<div class='col3'><h2>Debit</h2></div>
+		<div class='col4'><h2>Credit</h2></div>
+		<div class='col5'><h2>Merchant</h2></div>
+		<div class='col6'><h2>Category</h2></div>
+		{{ form_errors(form) }}
+
+		<!-- Totals -->
+		<div class='col1 totals'>Totals</div>
+		<div class='col2 totals'>&nbsp;</div>
+		<div class='col3 totals'>{{ totals['debit'] }}</div>
+		<div class='col4 totals'>{{ totals['credit'] }}</div>
+		<div class='col5 totals'>&nbsp;</div>
+		<div class='col6 totals'>&nbsp;</div>
+
+		<!-- Filter --> 
+		<div class='col1 filter'>Filter</div>
+		<div class="col2 filter">{{ form_widget(form.filter_description) }}</div>
+		<div class="col3 filter">{{ form_widget(form.filter_debit) }}</div>
+		<div class="col4 filter">{{ form_widget(form.filter_credit) }}</div>
+		<div class="col5 filter">{{ form_widget(form.filter_merchant_id) }}</div>
+		<div class="col6 filter">{{ form_widget(form.filter_category_id) }}</div>
+		<button type="submit" name="Filter" value="Filter" class="button butFilter">&nbsp;<i>Refresh the page</i></button>
+
+		<ul class="datagrid">
+			{% for transaction in form.transactions %}
+			<li>
+				{# Next div is an example of getting data from an object and formatting using a Twig filter (see twig book) #}
+				<div class="col1">{{ transaction.vars.value.date|date("d/m/Y") }}</div> 
+				<div class="col2">{{ form_widget(transaction.description) }}</div>
+				<div class="col3">{{ form_widget(transaction.debit) }}</div>
+				<div class="col4">{{ form_widget(transaction.credit) }}</div>
+				<div class="col5">{{ form_widget(transaction.fk_merchant_id) }}</div>
+				<div class="col6">{{ form_widget(transaction.fk_category_id) }}</div>
+				<div>{{ form_widget(transaction.transaction_id) }}</div>
+			</li>
+			{% endfor %}
+		</ul>
+		{{ form_rest(form) }}  {# Needed for form token #}
+		{% if form.transactions|length > 5 %}
+			{# If many results repeat some buttons TODO #}
+		{% endif %}
+    </form>
+</div>
+
+{% endblock %}

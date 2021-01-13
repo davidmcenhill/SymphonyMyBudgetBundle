@@ -1,0 +1,61 @@
+{# ===================================================================================================
+ * File name   : numeric.html.twig
+ * Created by  : D.McEnhill (davidmcenhill@gmail.com)
+ * Created on  : August 30, 2012
+ * Description : Contains report results in numeric format
+ * 
+ #}
+{# src/Btg/MyBudgetBundle/Resources/views/Reports/numeric.html.twig #}
+{% extends 'BtgMyBudgetBundle::layout.html.twig' %}
+{% form_theme form 'BtgMyBudgetBundle:Form:fields.html.twig' %}
+
+{% block work_area %} {# this will be inserted into block work area in the the layout template. #}
+<div>
+   <p>{% autoescape false %}{{ debug_msg }}{% endautoescape %}</p>
+   <h2>Income and Expenditure Report</h2>
+	{% for flashMessage in app.session.flashbag.get('notice') %}
+		<div class="flash-notice">
+			{{ flashMessage }}
+		</div>
+	{% endfor %}
+   <form id="reportNumericFormLayout" action="{{ path('BtgMyBudgetBundle_reports') }}" method="post" {{ form_enctype(form) }} novalidate="novalidate">
+        {{ form_errors(form) }}
+        {{ form_row(form.startdate, { 'label' : 'Start Date', 'attr' : { 'class' : 'startdate' }}) }}
+        {{ form_row(form.enddate, { 'label' : 'End Date', 'attr' : { 'class' : 'enddate' }}) }}
+        {{ form_row(form.required_interval, { 'label' : 'Interval', 'attr' : { 'class' : 'interval' }}) }}
+        {{ form_row(form.showgaps, { 'label' : 'Show Gaps', 'attr' : { 'class' : 'gaps' }}) }}
+        {{ form_rest(form) }}
+         <div class="button1"><input type="submit" name="Refresh" value="Refresh" /></div>
+   </form>
+   <div id="reportResultsLayout">
+    {% if xresults is defined and xresults %}
+		<div class="scrollX">
+         <div class='colNames'>
+            <span class='col1'>Date</span>
+            {% for category in xcategories %}
+               <span class='coln'>{{ category }}</span>
+            {% endfor %}
+        </div>
+        <div class='resultArea'>
+            {% set row_nr = 0 %} 
+            {% for date in xdates %}
+               {% set row_nr = row_nr + 1 %} 
+               <div class={{ row_nr is even ? 'evenRow' : 'oddRow'}}>
+                  <span class='col1'>{{ date }}</span>     
+                  {% for category in xcategories %}
+                     {% if xresults[date][category] is defined and xresults[date][category] %}
+                        <span class='coln'>{{ xresults[date][category] }}</span>     
+                     {% else %}
+                        <span class='coln'>0.00</span>
+                     {% endif %}
+                  {% endfor %} {# xcategories #}
+               </div>
+         {% endfor %} {# xdates #}
+        </div> {# resultArea #}
+	   </div> {# scrollX #}
+     {% else %}
+         No results available.
+     {% endif %}
+   </div> {# reportNumericLayout #}
+</div>
+{% endblock %}

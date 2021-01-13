@@ -1,0 +1,70 @@
+TODO in order of priority
+- Save in Transactions (production), get
+Notice: Undefined index: transaction_id in /home/betterus/public_html/budget/clean/src/Btg/MyBudgetBundle/Controller/TransactionController.php line 100
+500 Internal Server Error - ErrorException
+- Reports needs work : need to right align amount columns to make it easire to read, adapt size of scroll block to number of rows and
+lots more.
+- Should save Category / Merchant selected when you SAVE / ASSIGN, because very annoying having to reselect that.
+- When you navigate, does not SAVE! You just lose changes.
+- When you auto-create matches, need to drop the Authorisation string if present.
+- In Transactions, the Merchant drop down is not in alphabetical order. Also, seems to be based on description hence if that is missing there are problems.
+- In Transactions, the Merchant drop down should only reflect what is in categories (interesting feature to implement,
+perhaps use Ajax or send down data base of merchant to category and select via browser scripting?)
+- In Report, put the categories in the rows and dates in the columns.
+- In Report, horizontal scroll bar positioned of screen if not many results.
+- IN Reports, the vertical and horizontal headings should somehow be out of the scroll area such that they are always visible.
+- In transactions, you dont need to be able to select the merchant right? Maybe just show it.
+- Reports are getting some strange results. Investigate.
+- Need accounts, when importing set to account. Then in transactions show which account it was on from import ID.
+- Need a filter on matches.
+- In some circumstances the category etc drop down when near the bottom of the page does not allow the selection of options towards the bottom (insufficient vertical space).
+- When creating auto assignments, need a form to be able to edit, not create etc before saving them.
+- Getting duplicate matches created on save - need to ensure there is not already a match.
+- When you reallocate a category in transactions, there should be a dialog to ask whether to update the match
+and reassign.
+- Auto match creation is somehow updating to NULL objects it should not be!
+- Need to make multi-user (lots of rework now to introduce that).
+- Need to add account types to import, transactions & reports. 
+- In reports need to have total expenditure category which is sum of all columns.
+- Also need to have other virtual categories called unassigned credit and debit.
+- In categories, or in options, need to have a way to exclude neutral categories from totals.
+- Do this - if Category is assigned from transactions, automatically create a Merchant!
+- Filters : add capability to OR instead of AND the fields, and for amounts to have > and < constraints.
+- Repeat the page control at bottom of transaction page
+- On the Merchants page, should either not show all or move the new to the top because now that the list is long it is cumbersome.
+- Need that close transaction field with a tick box, then assign ignores these even when override category is set.
+- On pages such as the import one, the page needs to be vertically bigger to look better.
+- On the matches page the headings are running into one another.
+- The Options page needs styling.
+- Help blog needs work.
+- You found an open source adobe reader which you will need to handle PDF transaction files. 
+  - Browse to http://localhost/MyBudget/src/Btg/MyBudgetBundle/PDFreader/examples/PDFTextExample.php to see it in action (if local). 
+  - But for CBA statements, this does not work because encryption is enabled and this reader does not support encryption.
+  - It would be possible to implement decryption, see http://www.cs.cmu.edu/~dst/Adobe/Gallery/anon21jul01-pdf-encryption.txt for how it works.
+  - Also you found a C implementation that would help if you had to do this : xpdf. It also implements AES decryption which is a newer standard.
+
+FIXED
+- AUTHORISATION ONLY credit card transactions are leading to double bookings : need to check for those on import and also fix up the existing data for those.
+- In Report need to make same fix as for Transactions, end date needs to be from the current year (stuck to 2012 at the moment).
+- In Transactions, needs to be an option to order ascending or descending by date.
+- In Transactions, end date needs to be from the current year (stuck to 2012 at the moment).
+- Importing of credit card information results in negative signs in the debit column.
+- Need to have filters like unassigned in the transaction page.
+Reports - totals not correct because of problems with null values in the columns (any NULL in arithmetic results in a NULL result). 
+Best solution is to not allow NULLs in those amount columns, blanks seem to be treated as zeros. But probably best to set to zero on the import and have a constraint to make sure that happens.
+Merchants form - If you dont fill in category it appears to be incorrectly set.
+Will need to deal with this issue of not being able to delete categories if used in transaction. Merchants is fixed.
+- MAJOR BUG : IF YOU FILTER THEN SAVE THEN OVERWITES TRANSACTIONS - DATA ON THE WEB PAGE IS WRITTEN TO OTHER TRANSACTIONS!
+When you do an Assign it is overwriting the ones you have set.
+This is because the filter is only being applied when you do the Filter command and not on Save. 
+Hence the $transactions calculated on the save action is not the same as the ones on the filtered page, hence the wrong ones are bound and updated.
+The solution is therefore to simplify by making it one form only (which it can be, the reason one might want two forms is for modularity). The always  apply the filter.
+(precise steps you took, filter on not assigned, set a category then save. Use this SQL to see the issue:
+
+select * from importedtxn i where (i.date,i.credit,i.debit) not in (select date,credit,debit from transaction);
+select * from transaction t where (t.date,t.credit,t.debit) not in (select date,credit,debit from importedtxn);
+ Normally that would return an empty set but not after doing the above.
+
+ - Bug : totals are only right if all the data is on one page FIXED MAYBE BECAUSE SEEMS RIGHT NOW.
+- When auto assign is done it reports back on the total number of transactions NOT on the number of auto assignments done.
+

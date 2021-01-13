@@ -1,0 +1,935 @@
+
+html, body, h1, h2, h3, h4, h5, h6, h7, ul, li, sm 
+{
+   margin: 0;
+   padding: 0;
+}
+
+/* For debugging: */
+/*
+div {outline: 1px dashed red;}
+button {outline: 1px dashed yellow;}
+form {outline: 1px dashed blue;}
+ul {outline: 1px dashed orange;}
+li {outline: 1px dashed green;}
+b  {outline: 1px dashed violet;}
+*/
+
+h1 img {
+   display: block;
+}
+
+img {
+   border: 0;
+}
+a {
+   color: #464544;
+}
+
+a:hover {
+   color: #FFA405;
+}
+.left {
+   float: left;
+}
+.right {
+   float: right;
+}
+
+.more {
+   text-align: right;
+}
+
+.clear {
+   clear: both;
+}
+
+body {
+   background-color: #504634;
+   text-align: center;
+   font: 11px verdana, arial, sans-serif;
+   color: #695F4C;
+   padding-bottom: 10px;
+}
+
+th {
+   text-align: center;	
+}
+
+#logo
+{
+	background-image:url('../images/background.png');
+	width: 100%;
+	height: 180px;
+}
+
+#wrapper {
+   text-align: left;
+   margin: 37px auto;
+   width: 1200px;
+   background-color: #ffffff;
+   position: relative;
+}
+
+#work_area h1
+{
+   text-align: center;
+}
+
+.button, #logo .button
+{
+    display:block;
+    float:left;
+    margin:0 7px 0 0;
+    background-color:#e5e5e5;
+    border:1px solid #dedede;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    font-size:12px;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    padding:5px 10px 6px 7px; /* Links */
+}
+
+#logo h1
+{
+	display:inline;
+}
+
+#logo .button
+{
+	display:inline;
+	float:right;
+}
+
+#regLayoutForm textarea, input, select, label, button, optgroup 
+{ 
+   /**margin-top: 5px; **/
+   width: 95%; 
+}
+
+/* Style filters : select and input elements descendent of filter class */
+.filter select, .filter input	
+{
+	font-weight: bold;
+}
+
+/*================== Tooltips for the .button class ==============================*/
+/*
+* See Smashing CSS Effects for how this works. Basically make <i> invisible,
+*  unless hover where we display the <i> in a popup box underneath. 
+*/
+.button i
+{
+	display: none;
+}
+
+/* Defaults for tooltips, present below button. */
+.button:hover i
+{
+	display: block;
+	width: 10em;
+	position: absolute;
+	top: 100%;
+	left: 0%;
+	margin: 1em 0 0 0;
+	padding: 1em;
+	background: #CDE;
+	color: #565656;
+	border: 1px solid gray;
+}
+
+/* Present these to right of button */
+.butDefaults:hover i, .butAssign:hover i, .butUnknown:hover i, 
+.butDecategorise:hover i, .butDateDescending:hover i
+{
+	margin: 0 0 0 1em;
+	top: 0;
+	left: 100%;
+}
+
+/*================== Main Menu ===================================================*/
+ul#main-menu,
+ul#main-menu li {
+   /* Setting a common base */
+   margin: 0;
+   padding: 0;
+   list-style-type:none;
+}
+
+ul#main-menu li
+{
+   display: inline-block;
+}
+
+ul#main-menu li.subMenu
+{
+	padding: 8px;
+}
+
+#main-menu a:link,a:visited,.subMenu
+{
+	position: relative;
+   display:block;
+   width:120px;
+   font-weight:bold;
+   color:#FFFFFF;
+   background-color:#98bf21;
+   text-align:center;
+   padding:8px;
+   text-decoration:none;
+   text-transform:uppercase;
+}
+
+#main-menu a:hover,a:active
+{
+   background-color:#7A991A;
+}
+
+/* Hide sub menu items */
+#main-menu li.subMenu ul
+{
+	display: none;
+}
+
+/* Show sub menus on hover */
+#main-menu li.subMenu:hover ul
+{
+	display: block;
+	position: absolute;
+	top: 100%;
+	left: 0%;
+}
+
+/* Vertical Spacing between sub menu elements: */
+#main-menu .subMenu li
+{
+    border-top:3px solid #eee;
+}
+
+/* Dropdown arrow for submenus: */
+/* Todo: make it a white sprite */
+#main-menu b.dropdown
+{
+	position: absolute;
+	top: 10%;
+	left: 80%;
+	width: 21px;
+	height: 21px;
+	background-image:url(../images/sprite_black2.png);
+	background-position: -42px -84px;
+	background-repeat: no-repeat;
+}
+
+/*================== Merchant Layout ===================================================*/
+#merhantsLayout textarea, input, label, button, optgroup 
+{ 
+   /**margin-top: 5px; **/
+   width: 95%; 
+}
+
+#merhantsLayout .col1
+{
+  clear: left; /* Dont allow anything to the left of this */
+  float: left;
+  width: 20%; 
+}
+#merhantsLayout .col2
+{
+   clear: none;
+   float: left; 
+   width: 20%; 
+}
+#merhantsLayout .col3
+{
+   clear: none;
+   float: left; 
+   width: 20%; 
+}
+
+/*================== Category Layout ===================================================*/
+#categoryLayout textarea, input, label, button, optgroup 
+{ 
+   /**margin-top: 5px; **/
+   width: 95%; 
+}
+
+#categoryLayout .col1
+{
+  clear: left; /* Dont allow anything to the left of this */
+  float: left;
+  width: 30%; 
+}
+#categoryLayout .col2
+{
+   clear: none;
+   float: left; 
+   width: 30%; 
+}
+#categoryLayout .col3
+{
+   clear: none;
+   float: left; 
+   width: 10%; 
+}
+/*=================Transactions Page Controls ===============================================*/
+#pageControls .startdate
+{
+   padding: 10px;
+   clear: left; /* Dont allow anything to the left of this */
+   float: left;
+   width: 250px;
+}
+
+#pageControls .enddate
+{
+   padding: 10px;
+   float: left; 
+   width: 240px;
+}
+
+/* Individual select boxes in the dates: */
+#pageControls #transactions_form_startdate_day, #pageControls #transactions_form_enddate_day
+{
+   width: 20%;	
+}
+#pageControls #transactions_form_startdate_month, #pageControls #transactions_form_enddate_month
+{
+   width: 25%;	
+}
+#pageControls #transactions_form_startdate_year, #pageControls #transactions_form_enddate_year
+{
+   width: 25%;	
+}
+
+#pageControls label
+{
+	float: left;
+	width: 20%;
+	font-weight: bold; /* make text bold */
+	font-size: 1.3em;  /* Make text x1.3 bigger */
+	text-align: right;
+}
+
+#pageControls .pagecontrols
+{
+   clear: none;
+   float: left; 
+	width: 20%;
+}
+
+#pageControls .pageofpage
+{
+   clear: none;
+   float: none;
+   margin: 5px;
+	width: 100%;
+	text-align: center;
+	font-weight: bold; /* make text bold */
+	font-size: 1.3em;  /* Make tesxt x1.3 bigger */
+}
+
+#pageControls .butPrev
+{
+   clear: none;
+   float: left;
+	width: 14%;
+	margin: 0 0 0 0;	/* Required to override .button config */
+	padding: 0 0 0 0; /* Required to override .button config */
+}
+
+#pageControls .page_nr
+{
+   clear: none;
+   float: none;
+	width: 65%;
+	text-align: center;
+}
+
+#pageControls .butNext
+{
+   clear: none;
+   float: right; 
+	width: 14%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+#pageControls .nrresults
+{
+	margin: 10px 10px 10px 10px;
+   padding: 5px;
+   float: left; 
+   width: 10%; 
+}
+/*================== Transactions Layout ===================================================*/
+
+#taxLayout
+{
+    overflow: hidden;   // required to make this elements height include floated children, see your wiki.
+}
+
+/* Space between page controls and transation:*/
+
+#transactionsLayout h2
+{
+    margin-top: 15px;
+}
+
+#transactionsLayout .col1, #taxLayout .col1
+{
+  clear: left; /* Dont allow anything to the left of this */
+  float: left;
+  width: 15%; 
+}
+#transactionsLayout .col2, #taxLayout .col2
+{
+   clear: none;
+   float: left; 
+   width: 30%; 
+}
+
+#transactionsLayout .col3, #taxLayout .col3
+{
+   clear: none;
+   float: left; 
+   width: 10%; 
+}
+
+#transactionsLayout .col4, #taxLayout .col4
+{
+   clear: none;
+   float: left; 
+   width: 10%; 
+}
+
+#transactionsLayout .col5, #taxLayout .col5
+{
+   clear: none;
+   float: left; 
+   width: 15%; 
+}
+
+#transactionsLayout .col6, #taxLayout .col6
+{
+   clear: none;
+   float: left; 
+   width: 15%; 
+}
+
+#transactionsLayout .col7, #taxLayout .col7
+{
+   clear: none;
+   float: left; 
+   width: 15%; 
+}
+
+#transactionsLayout .totals
+{
+	font-weight: bold;	
+}
+
+#transactionsLayout .butFilter, #merhantsLayout .butFilter
+{
+	position: relative;
+	width: 21px;
+	height: 21px;
+   clear: none;
+   float: left; 
+	/* Position sprite's 'top-left 63px to left and 21px up. Peephole of 21x21 ends up on refresh. */
+	background-image:url(../images/sprite_black2.png);
+	background-position: -63px -21px; 
+}
+
+#transactionsLayout .butSave, #transactionsLayout .butCancel, #transactionsLayout .butAssign, 
+#transactionsLayout .butAction, #transactionsLayout .butRefresh, #transactionsLayout .butUnknown,
+#transactionsLayout .butDecategorise
+{
+   position: relative;
+   width: 100px;
+   height: 40px;
+   clear: none;
+   float: left; 
+   margin: 5px
+}
+
+#transactionsLayout .butRefresh
+{
+   clear: left; /* Dont allow anything to the left of this */
+}
+
+#transactionsLayout .divAction
+{
+	position: relative;
+   display: block;
+	clear: none;
+	float: left;
+}
+
+button.butAction
+{
+	margin-bottom:100px;
+}
+
+/* Hide sub menu items for Action button */
+#transactionsLayout .divAction ul
+{
+	display: none;
+}
+
+/* Show Action sub menus on hover */
+#transactionsLayout .divAction:hover ul
+{
+	display: block;
+	position: absolute;
+	top: 100%;
+	left: 0%;
+}
+
+/* Vertical Spacing between sub menu elements: */
+#transactionsLayout .divAction  li
+{
+    border-top:3px solid #eee;
+}
+
+#transactionsLayout button:hover
+{
+	background-color:#c5c5c5;
+;
+}
+
+#transactionsLayout .divAction li button
+{
+   position: relative;
+   display:block;
+   width: 100px;
+   height: 40px;
+	margin: 0 0 5px 5px; /* top right bottom left */
+}
+
+/* Doing this just to get the image on the left of the ASC/DESC image. */
+#transactionsLayout .h2Date, #taxLayout .h2Date
+{
+	float: left;
+	clear: left;
+}
+/* Order Date Ascending */
+#transactionsLayout .butDateAscending, #taxLayout .butDateAscending
+{	
+	position: relative;
+	width: 21px;
+	height: 21px;
+	clear: none;
+	float: right;
+	background-image: url(../images/sprite_black2.png);
+	background-position: 0 -84px;
+	margin-right: 10px;
+}
+
+/* Order Date Descending */
+#transactionsLayout .butDateDescending, #taxLayout .butDateDescending
+{	
+	position: relative;
+	width: 21px;
+	height: 21px;
+	clear: none;
+	float: right;
+	background-image: url(../images/sprite_black2.png);
+	background-position: -21px -84px;
+	margin-right: 20px;
+}
+
+
+/* Down arrow to indicate a menu: (using a b element to anchor to) */
+button.butAction  b
+{
+	position: absolute;
+	top: 10%;
+	left: 80%;
+	width: 21px;
+	height: 21px;
+	background-image:url(../images/sprite_black2.png);
+	background-position: -42px -84px;
+	background-repeat: no-repeat;
+}
+
+/* Special formatting for save button */
+button.butSave
+{
+	color: #529214;
+}
+
+button.butSave b.imgAnchor
+{
+	position: absolute;
+	top: 30%;
+	left: 80%;
+	width: 16px;
+	height: 16px;
+	background-image:url(../images/apply2.png);
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+/* Special formatting for cancel button */
+
+button.butCancel b.imgAnchor
+{
+	position: absolute;
+	top: 30%;
+	left: 80%;
+	width: 16px;
+	height: 16px;
+	background-image:url(../images/b_drop.png);
+	background-position: 0 0;
+	background-repeat: no-repeat;
+}
+
+/* Refresh button image */
+button.butRefresh b.imgAnchor
+{	
+	position: absolute;
+	top: 20%;
+	left: 75%;
+	width: 21px;
+	height: 21px;
+	background-image:url(../images/sprite_black2.png);
+	background-position: -63px -21px; 
+	background-repeat: no-repeat;
+}
+
+/*================== Import Form Layout (what you use to ask for a file import) ==============*/
+#importFormLayout .filename
+{
+   padding: 10px;
+   clear: left; /* Dont allow anything to the left of this */
+   float: left;
+   width: 30%; 
+}
+#importFormLayout .filetype
+{
+   padding: 10px;
+   clear: left; /* Dont allow anything to the left of this */
+   float: left; 
+   width: 30%; 
+}
+#importFormLayout .comment
+{
+   padding: 10px;
+   clear: left; /* Dont allow anything to the left of this */
+   float: left; 
+   width: 30%; 
+}
+#importFormLayout label
+{
+   display:inline;
+   font-weight:bold;
+   padding:4px;
+}
+/*================== Import History Layout ===================================================*/
+#importHistoryLayout
+{
+  clear: left; /* Dont allow anything to the left of this */
+  margin-top: 30px;
+}
+
+/* DIVs that are children of class odd */
+#importHistoryLayout .odd > div
+{
+   background-color:#EEFFEE;
+}
+
+#importHistoryLayout .col1
+{
+  margin-left: 30px; /* Left scrollbar writes over this */
+  display: block;
+  clear: left; /* Dont allow anything to the left of this */
+  float: left;
+}
+ 
+#importHistoryLayout .coln
+{
+   display: block;
+   clear: none;
+   float: left;
+}
+
+/* DIVs that are children of li (dont want heading not to wrap) */
+#importHistoryLayout ul li > div
+{
+   white-space:nowrap;   
+}
+
+#importHistoryLayout .date
+{
+	width: 120px;
+}
+
+#importHistoryLayout .nr
+{
+	width: 80px;
+}
+
+#importHistoryLayout .an
+{
+	width: 180px;
+	overflow: hidden;
+}
+
+/*================== Numeric Result Form Layout (where you change start date etc) ==============*/
+
+#reportNumericFormLayout .startdate
+{
+   padding: 10px;
+   clear: left; /* Dont allow anything to the left of this */
+   float: left;
+   width: 20%; 
+}
+#reportNumericFormLayout .enddate
+{
+   padding: 10px;
+   float: left; 
+   width: 20%; 
+}
+#reportNumericFormLayout .interval
+{
+   padding: 10px;
+    float: left; 
+   width: 20%; 
+}
+#reportNumericFormLayout .gaps
+{
+   padding: 10px;
+    float: left; 
+   width: 10%; 
+}
+
+.gaps label
+{
+   /* was trying to put something in here to justify but what? */
+   text-align:center;
+}
+
+#reportNumericFormLayout label
+{
+   display:inline;
+   font-weight:bold;
+   padding:4px;
+}
+.startdate select,.enddate select 
+{
+   /* Otherwise defaults to 95% and each element is displayed on a new line in the div */
+   width: 30%;
+}
+/*================== Result Numeric Layout ===================================================*/
+/* There is a major problem getting a scrollable table in both directions where the headings
+* behave correctly. It can be done but it uses complicated CSS with hardcoded sizes etc.
+* Here the whole table scrolls.
+*/
+#reportNumericLayout
+{
+ clear: left;
+ margin-top: 30px;
+ height: 500px;
+ overflow: auto; 
+}
+#reportResultTable
+{
+   table-layout:fixed; /** otherwise the size properties below are ignored **/
+   border:1px solid lightgreen;
+   border-collapse:collapse;
+   font: 11px verdana, arial, sans-serif;
+}
+#reportResultTable tr.odd
+{
+   background-color:#EEFFEE;
+}
+#reportResultTable th.resultsDate
+{
+   border:1px solid lightgreen;
+   border-collapse:collapse;
+}
+#reportResultTable th.resultsData
+{
+   border:1px solid lightgreen;
+   border-collapse:collapse;
+}
+#reportResultTable td
+{
+   border-right:1px solid lightgreen;
+   border-collapse:collapse;
+}
+/*================== Result Numeric Layout using divs ===================================================*/
+#reportResultsLayout
+{
+	width: 100%;
+	clear: left;
+	margin-top: 30px;
+	overflow-x: auto;
+}
+.scrollX
+{
+	width: 3000px;
+}
+
+.colNames
+{
+   width: 100%;
+   clear: left;
+   font: 11px verdana, arial, sans-serif; 
+}
+.resultArea
+{
+   width: 100%;
+   font: 11px verdana, arial, sans-serif;
+   height: 500px;
+   overflow-y: auto;
+   direction: rtl; /* Make text right to left such that scrollbar on the left */
+}
+.resultArea .oddRow
+{
+   width: 100%;
+   background-color:#EEFFEE;
+	clear: left;
+	float: left;
+   direction: ltr; /* Make text back to left to right */
+}
+
+.resultArea  .evenRow
+{
+   width: 100%;
+	clear: left;
+	float: left;
+   direction: ltr; 
+}
+
+.resultArea .col1, .colNames .col1
+{
+  margin-left: 30px; /* Left scrollbar writes over this */
+  display: block;
+  clear: left; /* Dont allow anything to the left of this */
+  float: left;
+  width: 120px;
+  
+ }
+.resultArea .coln, .colNames .coln
+{
+   display: block;
+   clear: none;
+   float: left; 
+   width: 80px;
+}
+
+
+/*================== Footer Layout ===================================================*/
+#copyright
+{
+   clear: both;
+   display: inline;
+}
+/*================== All Other Layout ===================================================*/
+.col1
+{
+  clear: left; /* Dont allow anything to the left of this */
+  float: left;
+  width: 40%; 
+}
+
+.col2
+{
+   clear: none;
+   float: left; 
+   width: 40%; 
+}
+.button1
+{
+  clear: left; /* Dont allow anything to the left of this */
+  float: left;
+  margin: 10px
+}
+
+.button2,.button3
+{
+   clear: none;
+   float: left; 
+   margin: 10px
+}
+
+.delete_link
+{
+   clear: none;
+   display: block;
+   float: left; 
+}
+.add_collection_link
+{
+   clear: both;
+   float: left;    
+}
+
+ul
+{
+   list-style-type:none;
+}
+
+
+/*================== Login Screen ===================================================*/
+/* Used an absolute positioning strategy to simplify the layout */
+div#login
+{
+	position: relative;
+	height: 400px;
+}
+
+#username
+{
+	position: absolute;
+	top: 25%;  /* Place top at 25% from top of div#login */
+	left: 30%;  /* Place in the middle of display (50% - width/2) */
+	width: 40%;
+	height: 10%;
+	font-size: 2.0em;  /* Make text x2 bigger */
+}
+
+#password
+{
+	position: absolute;
+	top: 50%;  /* Place top at 50% from top of div#login */
+	left: 30%;  /* Place in the middle of display (50% - width/2) */
+	width: 40%;
+	font-size: 2.0em;  /* Make text x2 bigger */
+}
+
+#login label
+{
+	position: absolute;
+	left: 10%;  
+	width: 19%;
+	padding-top: 5px;
+	font-weight: bold; /* make text bold */
+	font-size: 2.0em;  /* Make text x2 bigger */
+	text-align: right;
+}
+
+#login label[for="username"]
+{
+	top: 25%;  	
+}
+
+#login label[for="password"]
+{
+	top: 50%;  	
+}
+
+#login button
+{
+	position: absolute;
+	top: 75%;  /* Place top at 75% from top of div#login */
+	left: 40%;  /* Place in the middle of display (50% - width/2) */
+	width: 20%;
+	font-size: 2.0em;  /* Make text x2 bigger */
+}

@@ -1,0 +1,188 @@
+<?php
+
+/*
+ * src/Btg/MyBudgetBundle/Entity/Import.php
+ */
+
+namespace Btg\MyBudgetBundle\Entity;
+
+// Following is needed to run command line app/console doctrine:schema:update --force
+use Doctrine\ORM\Mapping as ORM;
+// Following is needed for the file object
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="import")
+ */
+class Import
+{
+	/*
+	 * Try to avoid text type because it can not be a key or index in MySql because
+	 * of it's unlimited length.
+	 */
+
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type="integer")
+	 * @ORM\GeneratedValue(strategy="AUTO")
+	 */
+	protected $import_id;
+
+	/**
+	 * @ORM\Column(type="integer",nullable=true) // TODO make nullable true when ready
+	 */
+	protected $fk_file_type_id;
+
+	/**
+	 * @ORM\Column(type="string",length=256,nullable=true)
+	 */
+	protected $comment;
+
+	/**
+	 * @ORM\Column(type="string",length=256,nullable=false)
+	 */
+	protected $filename;
+
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	public $path;
+
+	/**
+	 * @Assert\File(maxSize="6000000")
+	 */
+	public $file;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity="FieldPositions", inversedBy="Import")
+	 * @ORM\JoinColumn(name="fk_file_type_id", referencedColumnName="file_type_id")
+	 */
+	protected $file_type;
+
+	/**
+	 * @ORM\Column(type="date",nullable=false)
+	 */
+	protected $date_imported;
+
+	/**
+	 * @ORM\Column(type="integer",nullable=false)
+	 */
+	protected $tran_count;
+
+	/**
+	 * @ORM\Column(type="integer",nullable=true)
+	 */
+	protected $fk_tran_id_first;
+
+	/**
+	 * @ORM\Column(type="integer",nullable=true)
+	 */
+	protected $fk_tran_id_last;
+
+	/**
+	 * @ORM\OneToOne(targetEntity="Transaction", inversedBy="Import")
+	 * @ORM\JoinColumn(name="fk_tran_id_first", referencedColumnName="transaction_id")
+	 */
+	protected $transaction_first;
+
+	/**
+	 * @ORM\OneToOne(targetEntity="Transaction", inversedBy="Import")
+	 * @ORM\JoinColumn(name="fk_tran_id_last", referencedColumnName="transaction_id")
+	 */
+	protected $transaction_last;
+
+	function __construct()
+	{
+		$this->filename = '';
+	}
+
+	public function getFilename()
+	{
+		return $this->filename;
+	}
+
+	public function setFilename($filename)
+	{
+		$this->filename = $filename;
+	}
+
+	public function getComment()
+	{
+		return $this->comment;
+	}
+
+	public function setComment($comment)
+	{
+		$this->comment = $comment;
+	}
+
+	public function getDateImported()
+	{
+		return $this->date_imported;
+	}
+
+	public function setDateImported($date_imported)
+	{
+		$this->date_imported = $date_imported;
+	}
+
+	public function getTranCount()
+	{
+		return $this->tran_count;
+	}
+
+	public function setTranCount($tran_count)
+	{
+		$this->tran_count = $tran_count;
+	}
+
+	public function getTransactionFirst()
+	{
+		return $this->transaction_first;
+	}
+
+	public function setTransactionFirst($transaction_first)
+	{
+		$this->transaction_first = $transaction_first;
+	}
+
+	public function getTransactionLast()
+	{
+		return $this->transaction_last;
+	}
+
+	public function setTransactionLast($transaction_last)
+	{
+		$this->transaction_last = $transaction_last;
+	}
+
+	public function getFileType()
+	{
+		return $this->file_type;
+	}
+
+	public function setFileType($file_type)
+	{
+		$this->file_type = $file_type;
+	}
+
+	public function getAbsolutePath()
+	{
+		return ($this->path === null) ? null : ($this->getUploadRootDir() . '/' . $this->path);
+	}
+
+	public function getWebPath()
+	{
+		return ($this->path === null) ? null : ($this->getUploadDir() . '/' . $this->path);
+	}
+
+	protected function getUploadRootDir()
+	{
+		// the absolute directory path where uploaded documents should be saved
+		return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+	}
+
+}
+
+?>

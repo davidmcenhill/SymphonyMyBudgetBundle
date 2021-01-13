@@ -1,0 +1,63 @@
+{# src/Btg/MyBudgetBundle/Resources/views/datagrid.html.twig #}
+{# Use this template to add Javascript for a datagrid.       #}
+{# Assumptions are:                                          #}
+{#     ul of class datagrid for each row.                    #}
+{#                                                           #}
+{% extends 'BtgMyBudgetBundle::layout.html.twig' %}
+
+{% block javascripts %}
+<script type="text/javascript"
+		  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js">
+</script>
+   {# This is how you would include a script, but remember no twig in the js! 
+    <script type="text/javascript"
+      src="{{ asset('bundles/mybudget/js/datagrid.js') }}">
+   </script>
+   #}
+<script type="text/javascript">
+	jQuery(document).ready(function() 
+	{
+		 // add a delete link to all of the existing tag form li elements
+		 collectionHolder.find('li').each(function() {
+		 addTagFormDeleteLink($(this));
+		});
+	});
+      
+	// Get the div that holds the collection (must be in a ul of class datagrid).
+	var collectionHolder = $('ul.datagrid');
+       
+	function newGridRow(e) 
+	{
+		// add a new tag form (see next code block)
+		//addTagForm(collectionHolder, $newLinkLi);
+		var prototype = collectionHolder.attr('data-prototype');
+		// Replace '$$name$$' in the prototype's HTML to
+		// instead be a number based on the current collection's length.
+		var newForm = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().length);
+		var $newWidgets = $('<li></li>').append(newForm);
+		$('ul.datagrid').append($newWidgets);
+ 
+		// add a delete link to the new form
+		addTagFormDeleteLink($newWidgets);
+	 }
+             
+	function addTagFormDeleteLink($newWidgets)
+	{
+		// Add the delete row link.
+		var $removeFormA = $('<a class="delete_link" href="#"><img src="{{ asset('bundles/btgmybudget/images/b_drop.png') }}" /></a>');
+		$newWidgets.append($removeFormA);
+         
+		// When the link is pressed, remove this row.
+		$removeFormA.on('click', function(e) 
+		{
+			// prevent the link from creating a "#" on the URL
+			e.preventDefault();
+            
+			// remove the li for the tag form
+			$newWidgets.remove();
+		}
+		);
+	}
+	</script>
+ {% endblock %}
+

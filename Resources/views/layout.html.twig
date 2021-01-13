@@ -1,0 +1,42 @@
+{# src/Btg/MyBudgetBundle/Resources/views/layout.html.twig #}
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('bundles/btgmybudget/css/style.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+{% block body %} {# this will be inserted into block body in the the extended template. #}
+<div id="wrapper">
+	<div id="logo">
+		{# <h1>Personal Budget Analyser</h1> 
+		<img src="{{ asset('bundles/btgmybudget/images/background.png') }}" />#}
+			<a href={{ path('logout') }} class="button">Logout</a>
+		</div>
+		<ul id="main-menu">
+       {# Simple orite, path() refers to the Symfony route #}
+				<li><a href={{ path('BtgMyBudgetBundle_import') }}>Import</a></li>
+				<li><a href={{ path('BtgMyBudgetBundle_transactions') }}>Transactions</a></li>
+				<li><a href={{ path('BtgMyBudgetBundle_reports') }}>Reports</a></li>
+				<li class="subMenu">Setup<b class="dropdown"></b>
+					<ul>
+						<li><a href={{ path('BtgMyBudgetBundle_matches') }}>Matches</a></li>
+						<li><a href={{ path('BtgMyBudgetBundle_categories') }}>Categories</a></li>
+						<li><a href={{ path('BtgMyBudgetBundle_options') }}>Options</a></li>
+					</ul>
+				</li>
+				<li><a href={{ path('BtgMyBudgetBundle_help_notes') }}>Help</a></li>
+				<li><a href="http://betterusability.com.au/programming-notes/">Development</a></li>
+			</ul>
+			<div id="work_area">
+				<div class="inner">
+			{% block work_area %}{% endblock %}
+					</div>
+				</div>
+				<div class="clear"> </div>
+				<div id="copyright">
+					<p>Copyright &copy; 2013. David McEnhill all rights reserved</p>
+				</div>
+			</div>
+{% endblock %}
+
+
+

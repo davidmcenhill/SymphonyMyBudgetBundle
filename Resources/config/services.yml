@@ -1,0 +1,7 @@
+parameters:
+#    btg_my_budget.example.class: Btg\MyBudgetBundle\Example
+
+services:
+#    btg_my_budget.example:
+#        class: %btg_my_budget.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

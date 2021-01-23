@@ -1,5 +1,5 @@
 {
-  "name": "App\\Btg\\MyBudgetBundle",
+  "name": "davidmcenhill/MyBudgetBundle",
   "type": "symfony-bundle",
   "description": "Symfony bundle for budgeting",
   "license": "MIT",
@@ -14,5 +14,5 @@
   "autoload-dev": {
     "psr-4": {
     }
-  },
+  }
 }

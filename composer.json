@@ -1,5 +1,5 @@
 {
-  "name": "Btg\MyBudgetBundle",
+  "name": "App\\Btg\\MyBudgetBundle",
   "type": "symfony-bundle",
   "description": "Symfony bundle for budgeting",
   "license": "MIT",

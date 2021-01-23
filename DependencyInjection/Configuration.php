@@ -18,8 +18,8 @@ class Configuration implements ConfigurationInterface
 	 */
 	public function getConfigTreeBuilder()
 	{
-		$treeBuilder = new TreeBuilder();
-		$rootNode = $treeBuilder->root('btg_my_budget');
+		$treeBuilder = new TreeBuilder("btg_my_budget");
+		//$rootNode = $treeBuilder->root('btg_my_budget');
 
 		// Here you should define the parameters that are allowed to
 		// configure your bundle. See the documentation linked above for

@@ -4,33 +4,33 @@ btg_mybudget_homepage:
     methods: GET|HEAD
 
 BtgMyBudgetBundle_reports:
-  pattern: /budget/reports
+  path: /budget/reports
   defaults: { _controller: Btg\MyBudgetBundle:Reports:numeric }
   
 BtgMyBudgetBundle_help_notes:
-  pattern: /budget/help/notes
+  path: /budget/help/notes
   defaults: { _controller: Btg\MyBudgetBundle:Help:notes }
     
 BtgMyBudgetBundle_help:
-  pattern: /budget/help
+  path: /budget/help
   defaults: { _controller: Btg\MyBudgetBundle:Import:help }
   
 BtgMyBudgetBundle_import:
-  pattern: /budget/import
+  path: /budget/import
   defaults: { _controller: Btg\MyBudgetBundle:Import:process }
 
 BtgMyBudgetBundle_categories:
-  pattern: /budget/categories
+  path: /budget/categories
   defaults: { _controller: Btg\MyBudgetBundle:Category:categories }
   
 BtgMyBudgetBundle_matches:
-  pattern: /budget/matches
+  path: /budget/matches
   defaults: { _controller: Btg\MyBudgetBundle:Matches:matches }
   
 BtgMyBudgetBundle_options:
-  pattern: /budget/options
+  path: /budget/options
   defaults: { _controller: Btg\MyBudgetBundle:Options:edit }
   
 BtgMyBudgetBundle_transactions:
-  pattern: /budget/transactions
+  path: /budget/transactions
   defaults: { _controller: Btg\MyBudgetBundle:Transaction:transactions }

@@ -1,6 +1,7 @@
 BtgMyBudgetBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: Btg\MyBudgetBundle:Default:index }
+    path:  /hello/{name}
+    controller: Btg\MyBudgetBundle\Controller\DefaultController::index
+	methods: GET|HEAD
 
 BtgMyBudgetBundle_reports:
   pattern: /budget/reports

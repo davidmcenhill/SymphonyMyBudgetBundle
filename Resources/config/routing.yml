@@ -1,4 +1,4 @@
-BtgMyBudgetBundle_homepage:
+btg_mybudget_homepage:
     path:  /hello/{name}
     controller: Btg\MyBudgetBundle\Controller\DefaultController::index
     methods: GET|HEAD
